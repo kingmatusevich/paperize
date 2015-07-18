@@ -1,0 +1,86 @@
+<template name="Articles">
+
+  <div class="row" style="margin-top:0px">
+
+  <div class="col-md-6" style=" overflow-y:scroll; height: calc(100vh - 70px); -webkit-overflow-scrolling: touch;">
+
+    <!-- {{#momentum plugin="fade"}} -->
+    {{#if displayArticles}}
+<h1>Articles</h1>
+  <table class="table table-hover" style="text-overflow: ellipsis;">
+    <thead style="background-color:pink">
+      <tr>
+        <th>Site</th>
+        <th>Title</th>
+        <!-- <th>Authors</th> -->
+        <th>Date</th>
+      </tr>
+    </thead>
+
+    <tbody>
+
+      {{#each articles}}
+
+      <tr>
+
+        <td><img src="{{siteFavIcon}}" alt="{{siteName}}"></td>
+        <td class="articleLink">{{#linkTo route='articleRoute' hash='articleTop'}}{{title}}{{/linkTo}}</td>
+        <!-- <td>{{authorsConcat}}</td> -->
+        <td>{{formattedPublishingDate}}</td>
+
+      </tr>
+
+      {{/each}}
+
+    </tbody>
+  </table>
+  {{else}}
+  <div style="opacity: 0.4;">
+    <h1 style="opacity: 0.4;">Articles</h1>
+<table class="table table-hover" style="text-overflow: ellipsis; opacity: 0.4">
+  <thead style="background-color:pink">
+    <tr>
+      <th>Site</th>
+      <th>Title</th>
+      <!-- <th>Authors</th> -->
+      <th>Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each articles}}
+
+    <tr style="overflow:hidden;text-overflow: ellipsis; height: 20px;">
+      <td><img src="{{siteFavIcon}}" alt="{{siteName}}"></td>
+      <td class="articleLink">{{#linkTo route='articleRoute' hash='articleTop'}}{{title}}{{/linkTo}}</td>
+      <!-- <td>{{authorsConcat}}</td> -->
+      <td>{{formattedPublishingDate}}</td>
+    </tr>
+
+    {{/each}}
+  </tbody>
+</table>
+</div>
+  {{/if}}
+
+  <!-- {{/momentum}} -->
+
+</div>
+{{#momentum plugin="growl"}}
+{{#if title}}
+    <div id="articleColumn" class="col-md-6" style="overflow-x:hidden;overflow-y:scroll; height: calc(100vh - 70px); -webkit-overflow-scrolling: touch; ">
+      <div class="article">
+      <h2 id="articleTop"><a href="{{url}}">{{title}}</a></h2>
+      <h3>{{authorsConcat}}</h3>
+      {{#if formattedLongDate}}
+      <h4><i class="fa fa-calendar"></i> {{formattedLongDate}}</h4>
+      {{/if}}
+      <h5><img src="{{siteFavIcon}}" alt="{{siteName}}" style="margin-bottom: 0.25em;"> {{#if summary}}<b>Summary:</b>{{/if}}</h5>
+        <p class="intro">{{summary}}</p>
+      <div class="content">{{{html}}}</div>
+    </div>
+    </div>
+{{/if}}
+{{/momentum}}
+</div>
+
+</template>

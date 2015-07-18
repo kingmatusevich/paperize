@@ -1,0 +1,63 @@
+<template name="SitesList">
+  <h1>Sites List</h1>
+  <div style="overflow-x:hidden; overflow-y:scroll; height: calc(100vh - 140px)">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Site</th>
+        <th>Description</th>
+        <!-- <th>Last Fetched</th> -->
+        <th>URL</th>
+        <th>{{> search}}</th>
+      </tr>
+    </thead>
+
+
+
+      <tbody>
+          {{#esEach index="sites" id="searchField"}}
+            {{> siteListContent}}
+          {{/esEach}}
+          {{> searchExtras}}
+
+      </tbody>
+
+</table>
+</div>
+</template>
+
+<template name="search">
+  <div style="float:right">
+    {{> esInput index="sites" placeholder="Search..." allDocsOnEmpty=true id="searchField"}}
+  </div>
+</template>
+
+<template name="searchExtras">
+  {{> esLoadMoreButton index="sites" id="searchField"}}
+
+  {{#ifEsHasNoResults index="sites" id="searchField"}}
+    <div class="no-results">No results found!</div>
+  {{/ifEsHasNoResults}}
+
+  {{#ifEsIsSearching index="sites" id="searchField"}}
+          <div>Loading...</div>
+  {{/ifEsIsSearching}}
+</template>
+
+<template name="siteListContent">
+  <tr>
+    <td><img src="http://www.google.com/s2/favicons?domain={{url}}" alt="{{brandName}}"></td>
+    <td>{{#if description}}{{description}}{{else}}No description available.{{/if}}</td>
+    <!-- <td>{{lastFetchedFormatted}}</td> -->
+    <td><a href="{{url}}">{{url}}</a></td>
+    <td>
+        {{#if isUserSubscribed}}
+          <a href="#" id="removeSubscription"><i class="fa fa-remove"></i> Unsubscribe</a>
+        {{else}}
+          <a href="#" id="addSubscription"><i class="fa fa-plus"></i> Subscribe</a>
+
+        {{/if}}
+      <!-- {{> quickRemoveButton collection="Sites" _id=this._id beforeRemove=beforeRemove class="btn btn-danger"}} -->
+    </td>
+  </tr>
+</template>
