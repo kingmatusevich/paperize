@@ -20,6 +20,7 @@ Meteor.publish("userSubscriptions", function () {
   }
 });
 
+
 Meteor.publish("userArticles", function (subscriptions){
   if (this.userId){
       if (subscriptions != undefined)

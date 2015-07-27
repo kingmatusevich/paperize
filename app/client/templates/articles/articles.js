@@ -42,7 +42,9 @@ Template.Articles.helpers({
   },
   articles: function ()
   {
-    return Articles.find({},{sort: {insert_date: -1/*, date: -1*/}});
+    var history = Meteor.user().history;
+     var articles = Articles.find({_id:{$nin:history}},{sort: {insert_date: -1/*, date: -1*/}});
+     return articles;
   },
   siteName: function ()
   {

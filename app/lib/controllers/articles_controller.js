@@ -16,7 +16,9 @@ ArticlesController = RouteController.extend({
     return Articles.findOne({_id: this.params._id});
   },
   view: function () {
-    this.render('Articles', {});
+
+    this.render('Article', {});
+    
   },
   list: function () {
     // You can create as many action functions as you'd like.

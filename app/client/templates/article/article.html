@@ -1,3 +1,16 @@
 <template name="Article">
-  <h1>Find me in app/client/templates/article/article</h1>
+  {{#momentum plugin="growl"}}
+  {{#if title}}
+        <div class="article">
+        <h2 id="articleTop"><a href="{{url}}">{{title}}</a></h2>
+        <h3>{{authorsConcat}}</h3>
+        {{#if formattedLongDate}}
+        <h4><i class="fa fa-calendar"></i> {{formattedLongDate}}</h4>
+        {{/if}}
+        <h5><img src="{{siteFavIcon}}" alt="{{siteName}}" style="margin-bottom: 0.25em;"> {{#if summary}}<b>Summary:</b>{{/if}}</h5>
+          <p class="intro">{{summary}}</p>
+        <div class="content">{{{html}}}</div>
+      </div>
+  {{/if}}
+  {{/momentum}}
 </template>
